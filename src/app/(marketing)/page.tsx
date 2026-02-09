@@ -103,11 +103,11 @@ export default function HomePage() {
               <div className="absolute -left-6 -top-6 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
               <div className="absolute -bottom-8 -right-6 h-32 w-32 rounded-full bg-secondary/10 blur-2xl" />
               <Image
-                src="/assets/hero-placeholder.svg"
-                alt="Wok Konek preview"
+                src="/assets/wokkonek_img1.jpeg"
+                alt="Wok Konek - Get local help fast"
                 width={720}
                 height={540}
-                className="relative w-full rounded-3xl border border-border bg-white shadow-lg"
+                className="relative w-full rounded-3xl border border-border object-cover shadow-lg"
                 priority
               />
             </div>
@@ -176,11 +176,45 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <Image
-                src="/assets/steps-placeholder.svg"
-                alt="Job flow preview"
+                src="/assets/wokkonek_img2.jpeg"
+                alt="How Wok Konek works - Get it done"
                 width={720}
                 height={520}
-                className="w-full rounded-3xl border border-border bg-white shadow-lg"
+                className="w-full rounded-3xl border border-border object-cover shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Gallery ─── */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-3 text-center">
+            <h2 className="text-2xl font-bold text-text">
+              Real work, real results
+            </h2>
+            <p className="text-sm text-text-secondary">
+              See what our taskers are accomplishing across PNG
+            </p>
+          </div>
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="relative overflow-hidden rounded-2xl border border-border shadow-lg">
+              <Image
+                src="/assets/wokkonek_img4.jpeg"
+                alt="Wok Konek tasker at work"
+                width={600}
+                height={400}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-2xl border border-border shadow-lg">
+              <Image
+                src="/assets/wokkonek_img5.jpeg"
+                alt="Wok Konek tasker at work"
+                width={600}
+                height={400}
+                className="h-full w-full object-cover"
               />
             </div>
           </div>
@@ -218,11 +252,11 @@ export default function HomePage() {
             </div>
             <div>
               <Image
-                src="/assets/trust-placeholder.svg"
-                alt="Safety and payment verification"
+                src="/assets/wokkonek_img3.jpeg"
+                alt="Built for Papua New Guinea - Trusted platform"
                 width={680}
                 height={520}
-                className="w-full rounded-3xl border border-border bg-white shadow-lg"
+                className="w-full rounded-3xl border border-border object-cover shadow-lg"
               />
             </div>
           </div>
