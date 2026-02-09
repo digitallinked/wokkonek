@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  /* ─── Brand colors (logo-inspired, light-first) ─── */
+  --color-primary: #FF6A00;
+  --color-primary-hover: #E85C00;
+  --color-primary-light: #FFF3E8;
+
+  --color-secondary: #00B8D9;
+  --color-secondary-hover: #0099B5;
+  --color-secondary-light: #E6F9FC;
+
+  --color-accent: #1E6BFF;
+  --color-accent-hover: #1557D9;
+  --color-accent-light: #EBF2FF;
+
+  /* ─── Status colors ─── */
+  --color-success: #22C55E;
+  --color-success-light: #ECFDF5;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FFFBEB;
+  --color-danger: #EF4444;
+  --color-danger-light: #FEF2F2;
+
+  /* ─── Neutrals (light-first) ─── */
+  --color-bg: #FFFFFF;
+  --color-bg-muted: #F8FAFC;
+  --color-surface: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  --color-text: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+
+  /* ─── Brand gradient (for logo-accent moments only) ─── */
+  --color-brand-gradient: linear-gradient(90deg, #FFC400 0%, #FF6A00 35%, #FF2D55 65%, #00B8D9 100%);
+
+  /* ─── Font ─── */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* ─── Radius ─── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* ─── Base ─── */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

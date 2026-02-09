@@ -1,0 +1,25 @@
+{
+    "mcpServers": {
+      "supabase": {
+      "url": "https://mcp.supabase.com/mcp"
+    },
+    "stripe": {
+      "url": "https://mcp.stripe.com"
+    },
+    "vercel": {
+      "url": "https://mcp.vercel.com"
+    },
+      
+        "sentry": {
+          "url": "https://mcp.sentry.dev/mcp"
+        },
+        "browsermcp": {
+          "command": "npx",
+          "args": ["@browsermcp/mcp@latest"]
+        },
+        "next-devtools": {
+      "command": "npx",
+      "args": ["-y", "next-devtools-mcp@latest"]
+    }
+    }
+  }
