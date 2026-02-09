@@ -13,10 +13,10 @@ todos:
     status: completed
   - id: core-marketplace-jobs-bids
     content: Implement client posting wizard, tasker browse/bid, client accept bid, and status transitions through payment_pending.
-    status: in_progress
+    status: completed
   - id: manual-payment-admin-verify
     content: Implement receipt upload (JPG/PNG/PDF) to Storage + payment proof records and admin verification queue with approve/reject flow.
-    status: pending
+    status: in_progress
   - id: progress-and-completion
     content: Add tasker progress updates, tasker_completed, and client confirmation to close jobs with audit trail.
     status: pending
