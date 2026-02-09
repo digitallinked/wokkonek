@@ -1,0 +1,14 @@
+---
+description: Core project constraints and how we build features
+alwaysApply: true
+---
+
+# Wok Konek – Core Rules
+
+- **Stack**: Next.js 16 App Router + Supabase + Vercel.
+- **UI**: Tailwind only (no additional UI libraries).
+- **Data writes**: use server actions in `src/lib/actions/*`.
+- **Auth**: role is stored in `public.profiles.role` (`client|tasker|admin`).
+- **Security**: RLS is the primary authorization layer.
+- **MVP focus**: keep flows explicit, prefer clarity over clever abstractions.
+

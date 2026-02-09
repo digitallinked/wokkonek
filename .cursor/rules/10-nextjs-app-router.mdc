@@ -1,0 +1,14 @@
+---
+description: Next.js App Router conventions for this repo
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Next.js conventions
+
+- Use **Server Components by default**; add `"use client"` only when needed.
+- Mutations must go through **server actions** (no direct client-side writes to DB).
+- Keep route-specific components colocated under the route in `/_components/`.
+- Use `requireRole()` in layouts/pages that must be role-protected.
+- Prefer `redirect()` / `notFound()` from `next/navigation` for control flow.
+

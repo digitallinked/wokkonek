@@ -1,0 +1,12 @@
+---
+description: Tailwind UI conventions and theming tokens
+globs: src/**/*.{tsx,css}
+alwaysApply: false
+---
+
+# Tailwind UI rules
+
+- Use the existing design tokens in `src/app/globals.css` (brand + status colors).
+- Keep components accessible (labels, button types, link semantics).
+- Prefer consistent spacing and simple layouts; optimize for mobile/low bandwidth.
+

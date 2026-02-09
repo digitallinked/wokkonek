@@ -1,0 +1,18 @@
+---
+description: Supabase + RLS rules (Auth, DB, Storage)
+globs: src/lib/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Supabase + RLS rules
+
+- Assume **RLS is enforced**; never rely on UI-only checks.
+- In server actions:
+  - validate ownership and status transitions for better errors/UX
+  - but keep the ultimate permission decision in RLS
+- Receipts:
+  - Storage bucket is **private**
+  - access via **signed URLs** (admin UI)
+- When adding DB features:
+  - update `docs/DB_SCHEMA.md`, `docs/RLS.md`, `docs/STATUS_FLOW.md`
+
