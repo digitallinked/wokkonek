@@ -36,7 +36,7 @@ Service marketplace / job matching web app for Papua New Guinea (PNG).
 1) Install deps
 
 ```bash
-npm install
+pnpm install
 ```
 
 2) Create `.env.local` from `.env.example` and fill in:
@@ -47,7 +47,7 @@ npm install
 3) Run dev server
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ## Supabase project (current)

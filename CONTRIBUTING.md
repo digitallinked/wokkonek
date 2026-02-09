@@ -2,9 +2,9 @@
 
 ## Local setup
 
-- Install: `npm install`
+- Install: `pnpm install`
 - Env: copy `.env.example` → `.env.local` and fill Supabase values
-- Run: `npm run dev`
+- Run: `pnpm run dev`
 
 ## Code conventions
 
