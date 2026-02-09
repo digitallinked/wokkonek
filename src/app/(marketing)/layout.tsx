@@ -43,15 +43,21 @@ export default function MarketingLayout({
               &copy; {new Date().getFullYear()} Wok Konek. Empowering local
               skills in PNG.
             </p>
-            <div className="flex gap-6 text-sm text-text-secondary">
-              <Link href="#" className="hover:text-text transition-colors">
+            <div className="flex flex-wrap gap-6 text-sm text-text-secondary">
+              <Link href="/about" className="hover:text-text transition-colors">
                 About
               </Link>
-              <Link href="#" className="hover:text-text transition-colors">
+              <Link href="/how-it-works" className="hover:text-text transition-colors">
                 How it works
               </Link>
-              <Link href="#" className="hover:text-text transition-colors">
+              <Link href="/contact" className="hover:text-text transition-colors">
                 Contact
+              </Link>
+              <Link href="/privacy" className="hover:text-text transition-colors">
+                Privacy
+              </Link>
+              <Link href="/terms" className="hover:text-text transition-colors">
+                Terms
               </Link>
             </div>
           </div>
