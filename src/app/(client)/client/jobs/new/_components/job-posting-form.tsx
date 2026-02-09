@@ -26,7 +26,6 @@ export function JobPostingForm({
 
   useEffect(() => {
     if (!selectedProvince) {
-      setDistricts([]);
       return;
     }
 
@@ -181,7 +180,11 @@ export function JobPostingForm({
               name="province_id"
               required
               value={selectedProvince}
-              onChange={(e) => setSelectedProvince(e.target.value)}
+              onChange={(e) => {
+                const next = e.target.value;
+                setSelectedProvince(next);
+                if (!next) setDistricts([]);
+              }}
               className="mt-1 block w-full rounded-md border border-border bg-bg px-3 py-2 text-sm text-text focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
             >
               <option value="">Select a province</option>
