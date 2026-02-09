@@ -19,10 +19,10 @@ todos:
     status: completed
   - id: progress-and-completion
     content: Add tasker progress updates, tasker_completed, and client confirmation to close jobs with audit trail.
-    status: in_progress
+    status: completed
   - id: admin-ops-and-hardening
     content: Add category/location CRUD, suspend users, commission display (25%), and hardening (limits, rate controls, transition validation).
-    status: pending
+    status: in_progress
 isProject: false
 ---
 
