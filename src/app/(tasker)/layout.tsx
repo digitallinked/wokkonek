@@ -31,6 +31,12 @@ export default async function TaskerLayout({
               >
                 Browse Jobs
               </Link>
+              <Link
+                href="/tasker/assigned"
+                className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
+              >
+                Assigned Jobs
+              </Link>
             </div>
           </div>
           <div className="flex items-center gap-3">

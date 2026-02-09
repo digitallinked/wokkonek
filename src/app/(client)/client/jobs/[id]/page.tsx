@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { requireRole } from "@/lib/auth/guards";
 import { JobStatusBadge } from "@/components/job-status-badge";
 import { AcceptBidButton } from "./_components/accept-bid-button";
+import { ConfirmCompletionButton } from "./_components/confirm-completion-button";
 import Link from "next/link";
 
 export default async function ClientJobDetailPage({
@@ -24,6 +25,13 @@ export default async function ClientJobDetailPage({
     .single();
 
   if (!job) notFound();
+
+  // Get progress updates
+  const { data: updates } = await supabase
+    .from("job_updates")
+    .select("*, author:profiles!job_updates_author_id_fkey(display_name)")
+    .eq("job_id", id)
+    .order("created_at", { ascending: false });
 
   const { data: bids } = await supabase
     .from("bids")
@@ -115,7 +123,62 @@ export default async function ClientJobDetailPage({
             </p>
           </div>
         )}
+
+        {/* Tasker completed — client confirmation */}
+        {job.status === "tasker_completed" && (
+          <div className="mt-6 rounded-lg border-2 border-success bg-success-light p-4">
+            <h3 className="font-semibold text-text">
+              Tasker has completed the work
+            </h3>
+            <p className="mt-2 text-sm text-text-secondary">
+              Please review the work and confirm completion to close this job.
+            </p>
+            <div className="mt-3">
+              <ConfirmCompletionButton jobId={job.id} />
+            </div>
+          </div>
+        )}
+
+        {job.status === "client_confirmed" && (
+          <div className="mt-6 rounded-md bg-success-light p-4">
+            <p className="text-sm font-medium text-success">
+              This job is completed and confirmed.
+            </p>
+          </div>
+        )}
       </div>
+
+      {/* Progress updates */}
+      {updates && updates.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-lg font-semibold text-text">Progress Updates</h2>
+          <div className="mt-4 space-y-3">
+            {updates.map((update) => (
+              <div
+                key={update.id}
+                className="rounded-lg border border-border bg-bg p-4"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-text">
+                    {(update.author as unknown as { display_name: string })?.display_name}
+                  </span>
+                  <span className="text-xs text-text-muted">
+                    {new Date(update.created_at).toLocaleDateString("en-AU", {
+                      day: "numeric",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm text-text-secondary">
+                  {update.message}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Bids section */}
       <div className="mt-8">
