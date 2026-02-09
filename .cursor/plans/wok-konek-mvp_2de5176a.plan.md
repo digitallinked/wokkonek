@@ -10,10 +10,10 @@ todos:
     status: completed
   - id: vercel-early-deploy
     content: Deploy minimal app (marketing + auth + role dashboards) to Vercel with real Supabase env vars and validate prod auth/role routing.
-    status: in_progress
+    status: completed
   - id: core-marketplace-jobs-bids
     content: Implement client posting wizard, tasker browse/bid, client accept bid, and status transitions through payment_pending.
-    status: pending
+    status: in_progress
   - id: manual-payment-admin-verify
     content: Implement receipt upload (JPG/PNG/PDF) to Storage + payment proof records and admin verification queue with approve/reject flow.
     status: pending
