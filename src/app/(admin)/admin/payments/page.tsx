@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { requireRole } from "@/lib/auth/guards";
 import { VerifyPaymentActions } from "./_components/verify-payment-actions";
@@ -60,6 +61,12 @@ export default async function AdminPaymentsPage() {
                       <p className="text-sm text-text-secondary">
                         Uploaded by: {uploader?.display_name}
                       </p>
+                      <Link
+                        href={`/admin/jobs/${job.id}`}
+                        className="mt-1 inline-block text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+                      >
+                        View job &rarr;
+                      </Link>
                       <p className="text-sm text-text-muted">
                         Amount: K{Number(proof.amount).toLocaleString()} &middot;
                         File: {proof.original_filename}
@@ -125,6 +132,12 @@ export default async function AdminPaymentsPage() {
                         {proof.reject_reason &&
                           ` · Reason: ${proof.reject_reason}`}
                       </p>
+                      <Link
+                        href={`/admin/jobs/${job.id}`}
+                        className="mt-1 inline-block text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+                      >
+                        View job &rarr;
+                      </Link>
                     </div>
                     <span
                       className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${

@@ -42,8 +42,8 @@ export default function ContactPage() {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-extrabold text-text mb-4">Contact Us</h1>
         <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-          Have a question, suggestion, or need help? We'd love to hear from you.
-          Get in touch and we'll respond as soon as possible.
+          Have a question, suggestion, or need help? We&apos;d love to hear from you.
+          Get in touch and we&apos;ll respond as soon as possible.
         </p>
       </div>
 
@@ -53,8 +53,8 @@ export default function ContactPage() {
           <div>
             <h2 className="text-2xl font-bold text-text mb-6">Get in Touch</h2>
             <p className="text-text-secondary mb-6">
-              We're here to help! Whether you have questions about using Wok Konek,
-              need support with your account, or want to provide feedback, we're
+              We&apos;re here to help! Whether you have questions about using Wok Konek,
+              need support with your account, or want to provide feedback, we&apos;re
               listening.
             </p>
           </div>
@@ -79,14 +79,14 @@ export default function ContactPage() {
             <div className="rounded-lg border border-border bg-bg-muted p-4">
               <h3 className="font-semibold text-text mb-1">Technical Support</h3>
               <p className="text-sm text-text-secondary">
-                Experiencing technical issues? Let us know and we'll investigate.
+                Experiencing technical issues? Let us know and we&apos;ll investigate.
               </p>
             </div>
 
             <div className="rounded-lg border border-border bg-bg-muted p-4">
               <h3 className="font-semibold text-text mb-1">Feedback & Suggestions</h3>
               <p className="text-sm text-text-secondary">
-                We're always improving. Share your ideas and feedback with us.
+                We&apos;re always improving. Share your ideas and feedback with us.
               </p>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function ContactPage() {
                 Message Sent!
               </h3>
               <p className="text-text-secondary mb-6">
-                Thank you for contacting us. We'll get back to you as soon as
+                Thank you for contacting us. We&apos;ll get back to you as soon as
                 possible.
               </p>
               <button
@@ -257,7 +257,7 @@ export default function ContactPage() {
               Can I cancel a job after accepting a bid?
             </h3>
             <p className="text-sm text-text-secondary">
-              If payment hasn't been verified yet, you can cancel. Once payment is
+              If payment hasn&apos;t been verified yet, you can cancel. Once payment is
               verified and work begins, cancellation policies apply. Contact us for
               specific situations.
             </p>
@@ -268,7 +268,7 @@ export default function ContactPage() {
               How do I become a tasker?
             </h3>
             <p className="text-sm text-text-secondary">
-              Simply sign up and choose "Tasker" as your role. You can then browse
+              Simply sign up and choose &quot;Tasker&quot; as your role. You can then browse
               available jobs and start bidding on work that matches your skills.
             </p>
           </div>

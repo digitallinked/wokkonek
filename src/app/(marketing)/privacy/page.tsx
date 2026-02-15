@@ -20,10 +20,10 @@ export default function PrivacyPage() {
         <section className="mt-8">
           <h2 className="text-2xl font-bold text-text mb-4">Introduction</h2>
           <p className="text-text-secondary leading-relaxed mb-4">
-            Wok Konek ("we," "our," or "us") is committed to protecting your
+            Wok Konek (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your
             privacy. This Privacy Policy explains how we collect, use, disclose, and
             safeguard your information when you use our service marketplace platform
-            ("Service").
+            (&quot;Service&quot;).
           </p>
           <p className="text-text-secondary leading-relaxed">
             By using Wok Konek, you agree to the collection and use of information
@@ -185,7 +185,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="text-2xl font-bold text-text mb-4">Children's Privacy</h2>
+          <h2 className="text-2xl font-bold text-text mb-4">Children&apos;s Privacy</h2>
           <p className="text-text-secondary leading-relaxed">
             Our Service is not intended for individuals under the age of 18. We do
             not knowingly collect personal information from children. If you become
@@ -201,7 +201,7 @@ export default function PrivacyPage() {
           <p className="text-text-secondary leading-relaxed">
             We may update this Privacy Policy from time to time. We will notify you
             of any changes by posting the new Privacy Policy on this page and
-            updating the "Last Updated" date. You are advised to review this Privacy
+            updating the &quot;Last Updated&quot; date. You are advised to review this Privacy
             Policy periodically for any changes.
           </p>
         </section>
@@ -223,7 +223,7 @@ export default function PrivacyPage() {
               <a href="/contact" className="text-primary hover:underline">
                 contact form
               </a>{" "}
-              and select "General Inquiry" or "Privacy Question" as the subject.
+              and select &quot;General Inquiry&quot; or &quot;Privacy Question&quot; as the subject.
             </p>
           </div>
         </section>

@@ -142,7 +142,7 @@ export default function HowItWorksPage() {
         </h1>
         <p className="text-lg text-text-secondary max-w-2xl mx-auto">
           A simple, secure way to connect clients with skilled taskers across
-          Papua New Guinea. Here's how it works for both sides.
+          Papua New Guinea. Here&apos;s how it works for both sides.
         </p>
       </div>
 
@@ -248,7 +248,7 @@ export default function HowItWorksPage() {
           <div>
             <h3 className="font-semibold text-text mb-2">Transparent Process</h3>
             <p className="text-text-secondary text-sm">
-              No hidden fees. No surprises. You see exactly what you're paying for
+              No hidden fees. No surprises. You see exactly what you&apos;re paying for
               and when work will start.
             </p>
           </div>

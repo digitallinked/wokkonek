@@ -16,7 +16,6 @@ export default async function TaskerAssignedJobsPage() {
     .in("status", [
       "payment_pending",
       "payment_submitted",
-      "payment_verified",
       "in_progress",
       "tasker_completed",
       "client_confirmed",

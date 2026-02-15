@@ -31,7 +31,7 @@ export default function AboutPage() {
             Wok Konek was born from a simple idea: making it easier for people in
             Papua New Guinea to find and hire local service providers. We recognized
             that many skilled workers struggle to find clients, while many people
-            need help but don't know where to look.
+            need help but don&apos;t know where to look.
           </p>
           <p className="text-text-secondary leading-relaxed">
             Our platform bridges this gap by creating a trusted marketplace where
@@ -59,7 +59,7 @@ export default function AboutPage() {
                 Low Bandwidth Friendly
               </h3>
               <p className="text-text-secondary">
-                We've designed Wok Konek to work smoothly even on slower internet
+                We&apos;ve designed Wok Konek to work smoothly even on slower internet
                 connections. Our platform is lightweight, fast, and accessible on
                 any device.
               </p>
@@ -70,7 +70,7 @@ export default function AboutPage() {
               </h3>
               <p className="text-text-secondary">
                 Every job has clear status tracking. Clients can see exactly where
-                their job is in the process, and taskers know when they'll be paid.
+                their job is in the process, and taskers know when they&apos;ll be paid.
                 All payments are verified before work starts.
               </p>
             </div>
@@ -79,9 +79,9 @@ export default function AboutPage() {
                 Supporting Local Talent
               </h3>
               <p className="text-text-secondary">
-                We're committed to empowering local workers and businesses. By
+                We&apos;re committed to empowering local workers and businesses. By
                 connecting clients with local taskers, we help keep money in local
-                communities and support PNG's economy.
+                communities and support PNG&apos;s economy.
               </p>
             </div>
           </div>
@@ -116,9 +116,9 @@ export default function AboutPage() {
         <section className="mt-10">
           <h2 className="text-2xl font-bold text-text mb-4">Join Us</h2>
           <p className="text-text-secondary leading-relaxed mb-4">
-            Whether you're a client looking for help or a tasker looking for work,
+            Whether you&apos;re a client looking for help or a tasker looking for work,
             Wok Konek is here to connect you. Join our growing community and be part
-            of PNG's local service marketplace.
+            of PNG&apos;s local service marketplace.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4">
             <a

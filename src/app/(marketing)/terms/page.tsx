@@ -22,8 +22,8 @@ export default function TermsPage() {
         <section className="mt-8">
           <h2 className="text-2xl font-bold text-text mb-4">1. Acceptance of Terms</h2>
           <p className="text-text-secondary leading-relaxed mb-4">
-            By accessing and using Wok Konek ("Service," "Platform," "we," "our," or
-            "us"), you accept and agree to be bound by these Terms & Conditions. If
+            By accessing and using Wok Konek (&quot;Service,&quot; &quot;Platform,&quot; &quot;we,&quot; &quot;our,&quot; or
+            &quot;us&quot;), you accept and agree to be bound by these Terms & Conditions. If
             you do not agree to these terms, please do not use our Service.
           </p>
           <p className="text-text-secondary leading-relaxed">
@@ -128,7 +128,7 @@ export default function TermsPage() {
               <h3 className="text-lg font-semibold text-text mb-2">5.2 Bidding</h3>
               <p>
                 Taskers may submit bids on jobs. Bids must be genuine and reflect
-                the tasker's intent to perform the work at the proposed price. Once
+                the tasker&apos;s intent to perform the work at the proposed price. Once
                 a bid is accepted, both parties are expected to fulfill their
                 obligations.
               </p>
@@ -244,7 +244,7 @@ export default function TermsPage() {
             <li>Any damages or losses resulting from use of the Service</li>
           </ul>
           <p className="text-text-secondary leading-relaxed mt-4">
-            To the maximum extent permitted by law, Wok Konek's liability is
+            To the maximum extent permitted by law, Wok Konek&apos;s liability is
             limited to the amount you paid to use the Service, if any.
           </p>
         </section>

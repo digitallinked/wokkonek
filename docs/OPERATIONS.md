@@ -34,6 +34,14 @@ where id = '<user_uuid>';
 - Admin verifies under `/admin/payments`.
 - Admin views receipts using signed URLs (1-hour TTL).
 
+## Release payment to tasker (Phase 1 – manual)
+
+After a job reaches `client_confirmed`:
+
+1. Admin identifies completed jobs (e.g. via `/admin` or jobs list).
+2. Admin manually pays the tasker via bank transfer (outside the app).
+3. No in-app “release payment” step in Phase 1; this is an offline process.
+
 ## Known advisor follow-ups (performance)
 
 Supabase performance advisors currently flag:

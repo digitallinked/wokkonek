@@ -114,12 +114,13 @@ export async function acceptBid(jobId: string, bidId: string) {
     .neq("id", bidId)
     .eq("status", "submitted");
 
-  // Update job status and assign tasker
+  // Update job status, assign tasker, and set agreed price from accepted bid
   const { error: jobError } = await supabase
     .from("jobs")
     .update({
       status: "payment_pending",
       assigned_tasker_id: bid.tasker_id,
+      fixed_price: bid.amount,
     })
     .eq("id", jobId);
 

@@ -70,7 +70,9 @@ export default async function ClientJobDetailPage({
 
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="rounded-md bg-surface p-3">
-            <p className="text-xs text-text-muted">Budget</p>
+            <p className="text-xs text-text-muted">
+              {job.assigned_tasker ? "Agreed Price" : "Budget"}
+            </p>
             <p className="text-lg font-bold text-text">
               K{Number(job.fixed_price).toLocaleString()}
             </p>
@@ -89,25 +91,34 @@ export default async function ClientJobDetailPage({
           </div>
         </div>
 
-        {/* Payment instructions for payment_pending status */}
-        {job.status === "payment_pending" && (
+        {/* Payment instructions for payment_pending or payment_rejected */}
+        {(job.status === "payment_pending" || job.status === "payment_rejected") && (
           <div className="mt-6 rounded-lg border-2 border-warning bg-warning-light p-4">
             <h3 className="font-semibold text-text">
-              BSP Bank Transfer Required
+              {job.status === "payment_rejected"
+                ? "Payment Rejected – Please Re-upload Receipt"
+                : "BSP Bank Transfer Required"}
             </h3>
             <p className="mt-2 text-sm text-text-secondary">
-              Please transfer{" "}
+              {job.status === "payment_rejected"
+                ? "Your previous receipt was rejected. Please transfer "
+                : "Please transfer "}
               <strong className="text-text">
                 K{totalWithCommission.toLocaleString()}
-              </strong>{" "}
-              to the Wok Konek BSP account. Once transferred, upload your
-              receipt below for admin verification.
+              </strong>
+              {" "}
+              to the Wok Konek BSP account.
+              {job.status === "payment_rejected"
+                ? " Then upload your new receipt."
+                : " Once transferred, upload your receipt below for admin verification."}
             </p>
             <Link
               href={`/client/jobs/${job.id}/payment`}
               className="mt-3 inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover transition-colors"
             >
-              Upload Payment Receipt
+              {job.status === "payment_rejected"
+                ? "Re-upload Payment Receipt"
+                : "Upload Payment Receipt"}
             </Link>
           </div>
         )}

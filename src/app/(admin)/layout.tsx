@@ -39,6 +39,18 @@ export default async function AdminLayout({
                 Payments
               </Link>
               <Link
+                href="/admin/release-payment"
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+              >
+                Release Payment
+              </Link>
+              <Link
+                href="/admin/jobs"
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+              >
+                Jobs
+              </Link>
+              <Link
                 href="/admin/categories"
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               >
