@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function SignUpPage() {
+function SignUpContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -41,21 +43,24 @@ export default function SignUpPage() {
       return;
     }
 
-    router.push("/choose-role");
+    const dest = redirectTo?.startsWith("/")
+      ? `/choose-role?redirect=${encodeURIComponent(redirectTo)}`
+      : "/choose-role";
+    router.push(dest);
   }
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-bg rounded-xl border border-border shadow-sm p-8">
+      <div className="rounded-2xl border border-border bg-white p-8 shadow-lg">
         <h1 className="text-2xl font-bold text-text text-center">
           Create your account
         </h1>
         <p className="mt-2 text-sm text-text-secondary text-center">
-          Join Wok Konek and start getting things done.
+          Join Wok Konek and start getting things done in Papua New Guinea.
         </p>
 
         {error && (
-          <div className="mt-4 rounded-md bg-danger-light border border-danger/20 px-4 py-3 text-sm text-danger">
+          <div className="mt-4 rounded-lg bg-danger-light border border-danger/20 px-4 py-3 text-sm text-danger">
             {error}
           </div>
         )}
@@ -74,7 +79,7 @@ export default function SignUpPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-border bg-bg px-3 py-2 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              className="mt-1 block w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               placeholder="you@example.com"
             />
           </div>
@@ -92,7 +97,7 @@ export default function SignUpPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-border bg-bg px-3 py-2 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              className="mt-1 block w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               placeholder="At least 6 characters"
             />
           </div>
@@ -110,7 +115,7 @@ export default function SignUpPage() {
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-border bg-bg px-3 py-2 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              className="mt-1 block w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               placeholder="Repeat your password"
             />
           </div>
@@ -118,7 +123,7 @@ export default function SignUpPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Creating account..." : "Sign up"}
           </button>
@@ -128,12 +133,20 @@ export default function SignUpPage() {
           Already have an account?{" "}
           <Link
             href="/sign-in"
-            className="font-medium text-primary hover:text-primary-hover"
+            className="font-semibold text-primary hover:text-primary-hover"
           >
             Log in
           </Link>
         </p>
       </div>
     </div>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense fallback={<div className="w-full max-w-md rounded-2xl border border-border bg-white p-8 animate-pulse" />}>
+      <SignUpContent />
+    </Suspense>
   );
 }

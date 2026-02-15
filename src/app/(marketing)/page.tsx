@@ -74,16 +74,16 @@ export default function HomePage() {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
                 <Link
-                  href="/sign-up"
+                  href="/client/jobs/new"
                   className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary-hover transition-colors"
                 >
-                  Post a Job
+                  Post a task
                 </Link>
                 <Link
-                  href="/sign-up"
-                  className="inline-flex items-center justify-center rounded-lg border-2 border-secondary px-8 py-3 text-base font-semibold text-secondary hover:bg-secondary-light transition-colors"
+                  href="/browse"
+                  className="inline-flex items-center justify-center rounded-lg border-2 border-white bg-white px-8 py-3 text-base font-semibold text-primary hover:bg-white/90 transition-colors"
                 >
-                  Find Work
+                  Browse tasks
                 </Link>
               </div>
               <div className="mt-10 grid gap-6 sm:grid-cols-3">
@@ -275,16 +275,16 @@ export default function HomePage() {
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
-                href="/sign-up"
+                href="/client/jobs/new"
                 className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary-hover transition-colors"
               >
-                Post a Job
+                Post a task
               </Link>
               <Link
-                href="/sign-up"
+                href="/browse"
                 className="inline-flex items-center justify-center rounded-lg border-2 border-secondary px-8 py-3 text-base font-semibold text-secondary hover:bg-secondary-light transition-colors"
               >
-                Become a Tasker
+                Browse tasks
               </Link>
             </div>
           </div>

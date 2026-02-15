@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { getDefaultDashboard } from "@/lib/auth/utils";
 
 const roles = [
   {
@@ -10,22 +11,21 @@ const roles = [
     title: "I need work done",
     subtitle: "Client",
     description: "Post jobs, review bids, and hire skilled taskers.",
-    color: "primary",
   },
   {
     id: "tasker" as const,
     title: "I want to earn",
     subtitle: "Tasker",
     description: "Browse jobs, submit bids, and get paid for your skills.",
-    color: "secondary",
   },
 ];
 
-export default function ChooseRolePage() {
+function ChooseRoleContent() {
   const router = useRouter();
-  const [selectedRole, setSelectedRole] = useState<"client" | "tasker" | null>(
-    null
-  );
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect");
+  const [isClient, setIsClient] = useState(false);
+  const [isTasker, setIsTasker] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -35,8 +35,8 @@ export default function ChooseRolePage() {
     e.preventDefault();
     setError(null);
 
-    if (!selectedRole) {
-      setError("Please select a role.");
+    if (!isClient && !isTasker) {
+      setError("Please select at least one option.");
       return;
     }
 
@@ -58,11 +58,15 @@ export default function ChooseRolePage() {
       return;
     }
 
-    // Upsert profile
+    // Primary role for default dashboard: client when both or client-only, tasker when tasker-only
+    const primaryRole = isClient ? "client" : "tasker";
+
     const { error: profileError } = await supabase.from("profiles").upsert(
       {
         id: user.id,
-        role: selectedRole,
+        role: primaryRole,
+        is_client: isClient,
+        is_tasker: isTasker,
         display_name: displayName.trim(),
         phone: phone.trim() || null,
         status: "active",
@@ -76,7 +80,16 @@ export default function ChooseRolePage() {
       return;
     }
 
-    router.push(`/${selectedRole}/dashboard`);
+    const canAccess =
+      redirectTo?.startsWith("/") &&
+      ((redirectTo.startsWith("/tasker") && isTasker) ||
+        (redirectTo.startsWith("/client") && isClient) ||
+        redirectTo.startsWith("/admin"));
+    const dest =
+      canAccess && redirectTo
+        ? redirectTo
+        : getDefaultDashboard({ role: primaryRole, is_client: isClient, is_tasker: isTasker });
+    router.push(dest);
   }
 
   return (
@@ -86,7 +99,7 @@ export default function ChooseRolePage() {
           Set up your profile
         </h1>
         <p className="mt-2 text-sm text-text-secondary text-center">
-          Tell us how you want to use Wok Konek.
+          How do you want to use Wok Konek? You can choose both.
         </p>
 
         {error && (
@@ -96,32 +109,64 @@ export default function ChooseRolePage() {
         )}
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-          {/* Role selection */}
+          {/* Role selection - multi-select */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {roles.map((role) => (
-              <button
-                key={role.id}
-                type="button"
-                onClick={() => setSelectedRole(role.id)}
-                className={`rounded-lg border-2 p-4 text-left transition-all ${
-                  selectedRole === role.id
-                    ? role.id === "client"
-                      ? "border-primary bg-primary-light"
-                      : "border-secondary bg-secondary-light"
-                    : "border-border hover:border-border-strong"
-                }`}
-              >
-                <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                  {role.subtitle}
-                </p>
-                <p className="mt-1 text-base font-semibold text-text">
-                  {role.title}
-                </p>
-                <p className="mt-1 text-sm text-text-secondary">
-                  {role.description}
-                </p>
-              </button>
-            ))}
+            {roles.map((role) => {
+              const isSelected =
+                (role.id === "client" && isClient) ||
+                (role.id === "tasker" && isTasker);
+              return (
+                <button
+                  key={role.id}
+                  type="button"
+                  onClick={() =>
+                    role.id === "client"
+                      ? setIsClient((v) => !v)
+                      : setIsTasker((v) => !v)
+                  }
+                  className={`rounded-lg border-2 p-4 text-left transition-all ${
+                    isSelected
+                      ? role.id === "client"
+                        ? "border-primary bg-primary-light"
+                        : "border-secondary bg-secondary-light"
+                      : "border-border hover:border-border-strong"
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <span
+                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 ${
+                        isSelected
+                          ? role.id === "client"
+                            ? "border-primary bg-primary"
+                            : "border-secondary bg-secondary"
+                          : "border-border"
+                      }`}
+                    >
+                      {isSelected && (
+                        <svg
+                          className="h-3 w-3 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 12 12"
+                        >
+                          <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                        </svg>
+                      )}
+                    </span>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+                        {role.subtitle}
+                      </p>
+                      <p className="mt-1 text-base font-semibold text-text">
+                        {role.title}
+                      </p>
+                      <p className="mt-1 text-sm text-text-secondary">
+                        {role.description}
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
           {/* Profile fields */}
@@ -163,7 +208,7 @@ export default function ChooseRolePage() {
 
           <button
             type="submit"
-            disabled={loading || !selectedRole}
+            disabled={loading || (!isClient && !isTasker)}
             className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Setting up..." : "Continue"}
@@ -171,5 +216,13 @@ export default function ChooseRolePage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function ChooseRolePage() {
+  return (
+    <Suspense fallback={<div className="w-full max-w-lg rounded-xl border border-border bg-bg p-8 animate-pulse" />}>
+      <ChooseRoleContent />
+    </Suspense>
   );
 }

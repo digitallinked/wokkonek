@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { requireRole } from "@/lib/auth/guards";
-import { SignOutButton } from "@/components/sign-out-button";
+import { UserMenu } from "@/components/user-menu";
 
 export default async function ClientLayout({
   children,
@@ -11,39 +11,56 @@ export default async function ClientLayout({
 
   return (
     <div className="min-h-screen flex flex-col bg-bg-muted">
-      <header className="border-b border-border bg-bg sticky top-0 z-50">
+      <header className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
         <nav className="mx-auto max-w-7xl flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="text-xl font-bold tracking-tight">
-              <span className="text-primary">Wok</span>{" "}
-              <span className="text-text">Konek</span>
+          <div className="flex items-center gap-6 lg:gap-8">
+            <Link
+              href="/"
+              className="text-xl font-bold tracking-tight text-primary hover:text-primary-hover transition-colors"
+            >
+              Wok Konek
             </Link>
-            <div className="hidden sm:flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-6">
+              <Link
+                href="/client/jobs/new"
+                className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover transition-colors shadow-sm"
+              >
+                Post a task
+              </Link>
+              <Link
+                href="/browse"
+                className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
+              >
+                Browse tasks
+              </Link>
+              <Link
+                href="/client/jobs"
+                className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
+              >
+                My tasks
+              </Link>
               <Link
                 href="/client/dashboard"
                 className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
               >
                 Dashboard
               </Link>
-              <Link
-                href="/client/jobs"
-                className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
-              >
-                My Jobs
-              </Link>
-              <Link
-                href="/client/jobs/new"
-                className="text-sm font-medium text-primary hover:text-primary-hover transition-colors"
-              >
-                Post a Job
-              </Link>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-text-secondary">
-              {profile.display_name}
-            </span>
-            <SignOutButton />
+          <div className="flex items-center gap-3 pl-3 border-l border-border">
+            {profile.is_tasker && (
+              <Link
+                href="/tasker/dashboard"
+                className="text-sm font-medium text-secondary hover:text-secondary-hover transition-colors"
+              >
+                Switch to Tasker
+              </Link>
+            )}
+            <UserMenu
+              displayName={profile.display_name}
+              isClient={profile.is_client}
+              isTasker={profile.is_tasker}
+            />
           </div>
         </nav>
       </header>

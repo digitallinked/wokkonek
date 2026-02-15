@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { getDefaultDashboard } from "@/lib/auth/utils";
 
-export default function SignInPage() {
+function SignInContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +33,6 @@ export default function SignInPage() {
       return;
     }
 
-    // Check if profile exists, redirect to choose-role if not
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -38,12 +40,25 @@ export default function SignInPage() {
     if (user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("role")
+        .select("role, display_name, is_client, is_tasker")
         .eq("id", user.id)
         .single();
 
-      if (profile?.role) {
-        router.push(`/${profile.role}/dashboard`);
+      const hasDisplayName = profile?.display_name?.trim?.();
+      const hasRole =
+        profile?.is_client || profile?.is_tasker || profile?.role === "admin";
+
+      if (hasDisplayName && hasRole) {
+        const canAccess =
+          redirectTo?.startsWith("/") &&
+          ((redirectTo.startsWith("/tasker") && profile?.is_tasker) ||
+            (redirectTo.startsWith("/client") && profile?.is_client) ||
+            (redirectTo.startsWith("/admin") && profile?.role === "admin"));
+        const dest =
+          canAccess && redirectTo
+            ? redirectTo
+            : getDefaultDashboard(profile);
+        router.push(dest);
       } else {
         router.push("/choose-role");
       }
@@ -52,16 +67,16 @@ export default function SignInPage() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-bg rounded-xl border border-border shadow-sm p-8">
+      <div className="rounded-2xl border border-border bg-white p-8 shadow-lg">
         <h1 className="text-2xl font-bold text-text text-center">
           Welcome back
         </h1>
         <p className="mt-2 text-sm text-text-secondary text-center">
-          Log in to your Wok Konek account.
+          Log in to your Wok Konek account to get tasks done.
         </p>
 
         {error && (
-          <div className="mt-4 rounded-md bg-danger-light border border-danger/20 px-4 py-3 text-sm text-danger">
+          <div className="mt-4 rounded-lg bg-danger-light border border-danger/20 px-4 py-3 text-sm text-danger">
             {error}
           </div>
         )}
@@ -80,7 +95,7 @@ export default function SignInPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-border bg-bg px-3 py-2 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              className="mt-1 block w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               placeholder="you@example.com"
             />
           </div>
@@ -98,7 +113,7 @@ export default function SignInPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-border bg-bg px-3 py-2 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              className="mt-1 block w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               placeholder="Your password"
             />
           </div>
@@ -106,7 +121,7 @@ export default function SignInPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Logging in..." : "Log in"}
           </button>
@@ -116,12 +131,20 @@ export default function SignInPage() {
           Don&apos;t have an account?{" "}
           <Link
             href="/sign-up"
-            className="font-medium text-primary hover:text-primary-hover"
+            className="font-semibold text-primary hover:text-primary-hover"
           >
             Sign up
           </Link>
         </p>
       </div>
     </div>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense fallback={<div className="w-full max-w-md rounded-2xl border border-border bg-white p-8 animate-pulse" />}>
+      <SignInContent />
+    </Suspense>
   );
 }

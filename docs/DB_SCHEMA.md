@@ -13,7 +13,9 @@
 ### `profiles`
 
 - `id` (uuid, pk) → `auth.users.id`
-- `role` (`user_role`)
+- `role` (`user_role`) — primary role for default dashboard
+- `is_client` (boolean) — can post jobs and hire taskers
+- `is_tasker` (boolean) — can browse jobs and submit bids
 - `status` (`user_status`)
 - `display_name` (text)
 - `phone` (text, nullable)
@@ -93,4 +95,5 @@
 - `20260209043501_seed_provinces_districts`
 - `20260209043529_enable_rls_and_policies`
 - `20260209045840_fix_function_search_paths`
+- `add_profile_dual_role_support` — adds `is_client`, `is_tasker` for dual-role support
 

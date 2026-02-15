@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getDefaultDashboard } from "./utils";
 
 export type UserRole = "client" | "tasker" | "admin";
+export { getDefaultDashboard } from "./utils";
 
 export async function getSession() {
   const supabase = await createClient();
@@ -54,13 +56,28 @@ export async function requireRole(role: UserRole) {
     redirect("/suspended");
   }
 
-  if (profile.role !== role) {
-    // Redirect to the user's correct dashboard
-    redirect(`/${profile.role}/dashboard`);
+  // Admin can access admin routes
+  if (role === "admin") {
+    if (profile.role !== "admin") {
+      redirect(getDefaultDashboard(profile));
+    }
+    return { user, profile };
+  }
+
+  // Client/tasker: check is_client/is_tasker for dual-role support
+  const isClient = profile.is_client ?? profile.role === "client";
+  const isTasker = profile.is_tasker ?? profile.role === "tasker";
+
+  if (role === "client" && !isClient) {
+    redirect(isTasker ? "/tasker/dashboard" : "/choose-role");
+  }
+  if (role === "tasker" && !isTasker) {
+    redirect(isClient ? "/client/dashboard" : "/choose-role");
   }
 
   return { user, profile };
 }
+
 
 export async function requireProfileComplete() {
   const user = await requireAuth();
