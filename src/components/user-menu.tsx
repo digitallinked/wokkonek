@@ -42,7 +42,7 @@ export function UserMenu({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-center h-9 w-9 rounded-full bg-primary/10 text-primary font-semibold hover:bg-primary/20 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        className="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 text-white font-semibold hover:bg-white/20 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black"
         aria-expanded={open}
         aria-haspopup="true"
       >

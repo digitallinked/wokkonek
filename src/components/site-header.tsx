@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { UserMenu } from "@/components/user-menu";
 
@@ -30,14 +31,21 @@ export async function SiteHeader() {
       : "/tasker/jobs";
 
   return (
-    <header className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
+    <header className="border-b border-white/10 bg-black sticky top-0 z-50 shadow-sm">
       <nav className="mx-auto max-w-7xl flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6 lg:gap-8">
           <Link
             href="/"
-            className="text-xl font-bold tracking-tight text-primary hover:text-primary-hover transition-colors"
+            className="flex items-center transition-opacity hover:opacity-90"
           >
-            Wok Konek
+            <Image
+              src="/assets/wokkonek_logo_no-bg.png"
+              alt="Wok Konek"
+              width={140}
+              height={44}
+              className="h-16 w-auto object-contain"
+              priority
+            />
           </Link>
 
           <div className="hidden sm:flex items-center gap-6">
@@ -49,14 +57,14 @@ export async function SiteHeader() {
             </Link>
             <Link
               href="/browse"
-              className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
             >
               Browse tasks
             </Link>
             {isLoggedIn && (
               <Link
                 href={myTasksHref}
-                className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               >
                 My tasks
               </Link>
@@ -69,11 +77,11 @@ export async function SiteHeader() {
             <>
               <Link
                 href="/how-it-works"
-                className="hidden md:inline text-sm font-medium text-text-secondary hover:text-text transition-colors"
+                className="hidden md:inline text-sm font-medium text-gray-300 hover:text-white transition-colors"
               >
                 How it works
               </Link>
-              <div className="flex items-center gap-3 pl-3 border-l border-border">
+              <div className="flex items-center gap-3 pl-3 border-l border-white/10">
                 <UserMenu
                   displayName={profile?.display_name ?? null}
                   isClient={profile?.is_client ?? false}
@@ -85,13 +93,13 @@ export async function SiteHeader() {
             <>
               <Link
                 href="/how-it-works"
-                className="hidden md:inline text-sm font-medium text-text-secondary hover:text-text transition-colors"
+                className="hidden md:inline text-sm font-medium text-gray-300 hover:text-white transition-colors"
               >
                 How it works
               </Link>
               <Link
                 href="/sign-in"
-                className="text-sm font-medium text-text-secondary hover:text-text transition-colors"
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               >
                 Log in
               </Link>
